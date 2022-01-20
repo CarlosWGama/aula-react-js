@@ -1,0 +1,23 @@
+#visualizar-main {
+    min-height: 100%;
+    background-color: #1D84B5;
+}
+
+#visualizar-align {
+    display: flex;
+    justify-content: center;
+}
+
+#visualizar-container {
+    width: 1080px;
+    height: 100%;
+    background-color: white;
+}
+
+#visualizar-info {
+    padding: 10px;
+}
+
+#visualizar-curso {
+    font-weight: bolder;
+}
