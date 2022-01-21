@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import Template from '../template';
+import { useParams } from 'react-router-dom';
+
 import { FormComentario, Comentario } from './components';
 import './styles.css';
 
 function VisualizarPage() {
+
+    const params = useParams();
+    console.log(params.id);
 
     const [ comentarios, setComentario ] = useState([]);
     const [ video, setVideo ] = useState({
@@ -24,7 +28,6 @@ function VisualizarPage() {
 
 
     return ( 
-        <Template>
             <div id="visualizar-align">
                 <div id="visualizar-container">
                     <iframe width="100%" height="500" src={video.url} frameborder="0"  allowfullscreen></iframe>
@@ -41,7 +44,6 @@ function VisualizarPage() {
                         </div>
                 </div>
             </div>
-        </Template>
      );
 }
 

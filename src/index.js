@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import reportWebVitals from './reportWebVitals';
-import HomePage from './pages/home';
-import VisualizarPage from './pages/visualizar';
+import App from './App';
 
 ReactDOM.render(
     <React.StrictMode>
-      <HomePage/>
-      {/* <VisualizarPage /> */}
+      <App/>
+      
     </React.StrictMode>,
     document.getElementById('root')
 );
