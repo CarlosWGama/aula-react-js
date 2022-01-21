@@ -1,12 +1,12 @@
 import './card-video.css'
 
-function CardVideo() {
+function CardVideo(props) {
     return ( <div className="cv-container">
-        <img className='cv-img' src="http://lorempixel.com.br/200/100"/>
+        <img className='cv-img' src={props.video.link}/>
         <div className='cv-info'>
-            <p className='cv-curso'>curso x</p>
-            <p className='cv-professor'>Professor João</p>
-            <p className='cv-duracao'>20min</p>
+            <p className='cv-curso'>{props.video.curso}</p>
+            <p className='cv-professor'>{props.video.professor}</p>
+            <p className='cv-duracao'>{props.video.duracao}</p>
         </div>
     </div> );
 }

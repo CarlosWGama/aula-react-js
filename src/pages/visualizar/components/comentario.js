@@ -1,9 +1,12 @@
 import './comentario.css';
 
-function Comentario() {
+function Comentario(props) {
+
+    // Dica: podemos extrair uma propriedade de uma variável usando a seguinte sintaxe
+    const { comentario } = props;
     return ( <div className='comentario-container'>
-        <p className='comentario-autor'>Fulano (fulano@gmail.com)</p>
-        <p className='comentario'>comentário da pessoa</p>
+        <p className='comentario-autor'>{comentario.autor} ({comentario.email})</p>
+        <p className='comentario'>{comentario.comentario}</p>
     </div> );
 }
 

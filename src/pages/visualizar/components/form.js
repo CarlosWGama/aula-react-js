@@ -1,11 +1,24 @@
+import { useState } from 'react';
 import './form.css';
 
-function FormComentario() {
-    return (<form id="form-form">
+function FormComentario(props) {
+
+    const [autor, setAutor] = useState();
+    const [email, setEmail] = useState();
+    const [comentario, setComentario] = useState();
+    
+    const handleSubmit = (e) => {
+        //e.preventDefault evita que a página seja enviada para o action (recarregue)
+        e.preventDefault()
+        props.enviarComentario({autor, email, comentario});
+    }
+
+    return (<form id="form-form" onSubmit={handleSubmit}>
         <p>Enviar comentário</p>
-        <input className='form-input' type="text" placeholder='Digite seu nome' required/>
-        <input className='form-input' type="email" placeholder='Digite seu email' required/>
-        <textarea className='form-input' placeholder='Digite seu email' rows={5} cols={100} required/>
+        <input className='form-input' type="text" placeholder='Digite seu nome' required onChange={e => setAutor(e.target.value) }/>
+
+        <input className='form-input' type="email" placeholder='Digite seu email' required onChange={e => setEmail(e.target.value) }/>
+        <textarea className='form-input' placeholder='Digite seu comentário' rows={5} cols={100} required onChange={e => setComentario(e.target.value) }/>
         <button className='form-button'>Enviar</button>
     </form>);
 }
