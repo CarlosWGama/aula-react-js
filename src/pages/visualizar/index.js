@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import api from '../../providers/api';
 
 import { FormComentario, Comentario } from './components';
 import './styles.css';
@@ -7,22 +8,59 @@ import './styles.css';
 function VisualizarPage() {
 
     const params = useParams();
-    console.log(params.id);
-
-    const [ comentarios, setComentario ] = useState([]);
+    
+    const [ comentarios, setComentarios ] = useState([]);
     const [ video, setVideo ] = useState({
-        url: 'https://www.youtube.com/embed/N9O06OAv4v0',
-        curso: 'Curso X',
-        professor: 'Professor Carlos',
-        duracao: '20min'
+        id: 0,
+        url: '',
+        curso: '---',
+        professor: '---',
+        duracao: '0min'
     });
+    
+    useEffect(() => {
+        console.log(params.id);
+        //Busca vídeo
+        api.get(`/videos/${params.id}`)
+            .then((response) => {
+                const novoVideo = response.data.data.attributes;
+                novoVideo.id = response.data.id;
+                setVideo(novoVideo);
+            })
+            .catch(e => console.log(e));
 
+
+        //Busca comentários
+        api.get(`/comentarios?filters[video]=${params.id}`)
+            .then(response => {
+                const novosComentarios = [];
+                response.data.data.forEach(data => {
+                    const comentario = data.attributes;
+                    comentario.id = data.id;
+                    novosComentarios.push(comentario)
+                })
+    
+                setComentarios(novosComentarios);
+            })
+            .catch(e => console.log(e))
+    
+    }, [])
+
+    
 
     const enviarComentario = (comentario) => {
         //[...variavel] retorna um vetor com os dados da variavel
-        const novoComentario = [...comentarios];
-        novoComentario.push(comentario);
-        setComentario(novoComentario);
+        const novosComentarios = [...comentarios];
+        novosComentarios.push(comentario);
+        setComentarios(novosComentarios);
+
+        //envia comentario
+        comentario.video = params.id;
+        api.post('/comentarios', {
+            data: comentario
+        })
+            .then(sucess => console.log(sucess))
+            .catch(error => console.log(error))
     }
 
 

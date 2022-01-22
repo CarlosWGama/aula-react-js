@@ -1,0 +1,51 @@
+@baseUrl = http://localhost:1337
+
+
+### Saber mais de filtro buscar por 
+### https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest/filtering-locale-publication.html#filtering
+
+##### VIDEO ########
+### Busca apenas que comecem com o texto 
+GET {{baseUrl}}/api/videos?filters[curso][$startsWith]=Reac
+
+### Busca um vídeo pelo ID
+GET {{baseUrl}}/api/videos/1
+
+
+#### COMENTARIOS #####
+### Busca todos comentários
+GET {{baseUrl}}/api/comentarios
+### Busca apenas comentários de vídeo com id 1
+GET {{baseUrl}}/api/comentarios?filters[video]=1
+
+### Cadastra comentário
+POST {{baseUrl}}/api/comentarios
+Content-Type: application/json
+
+{
+    "data": { 
+        "autor": "Carlos",
+        "email": "carlos@teste.com",
+        "comentario": "Testando nossa api",
+        "video": 2
+    }
+}
+
+### Cadastra usuário
+POST {{baseUrl}}/api/auth/local/register
+Content-Type: application/json
+
+{
+    "username": "novo",
+    "email": "novo@teste.com",
+    "password": "Teste123"
+}
+
+### Loga usuário
+POST {{baseUrl}}/api/auth/local
+Content-Type: application/json
+
+{
+    "identifier": "novo@teste.com",
+    "password": "Teste123"
+}
